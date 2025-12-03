@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 func exampleInput() []string {
@@ -21,10 +23,10 @@ func realInput() []string {
 }
 
 func joltage(line string, numElements int) int {
-	start_index := -1
+	startIndex := -1
 	value := 0
 	for rightBlock := -numElements + 1; rightBlock <= 0; rightBlock++ {
-		_startIndex := start_index + 1
+		_startIndex := startIndex + 1
 
 		subLine := line[_startIndex : len(line)+rightBlock]
 		var maxRune rune
@@ -36,7 +38,7 @@ func joltage(line string, numElements int) int {
 			}
 		}
 		value = value*10 + int(maxRune-'0')
-		start_index += maxIndex + 1
+		startIndex += maxIndex + 1
 	}
 	return value
 }
@@ -58,6 +60,10 @@ func part2(lines []string) int {
 }
 
 func main() {
+	t1 := time.Now()
+	defer func() {
+		fmt.Println("Execution Time:", time.Since(t1))
+	}()
 	lines := realInput()
 	println("Part 1:", part1(lines))
 	println("Part 2:", part2(lines))
