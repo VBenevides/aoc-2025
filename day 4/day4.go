@@ -94,7 +94,9 @@ func removeRoll(rolls [][]rune, row, col int) {
 
 func part2(rolls [][]rune) {
 	accessibleCount := 0
-	for k := 0; k < len(rolls); k++ {
+	lastAccessibleCount := -1
+	for accessibleCount != lastAccessibleCount {
+		lastAccessibleCount = accessibleCount
 		for i, row := range rolls {
 			for j, value := range row {
 				if value == '@' && checkAccessible(rolls, i, j, 3) {
